@@ -57,7 +57,7 @@
 @implementation CKTableAlertView
 @synthesize data=_data;
 
-- (id) initWithData:(NSArray *)data title:(NSString *)title hasCancelButton:(Boolean)hasCancelButton
+- (id) initWithArray:(NSArray *)data title:(NSString *)title hasCancelButton:(Boolean)hasCancelButton
 {
     self = [super initWithFrame:CGRectMake(AlertPosX, AlertPosY, AlertWidth, AlertHeight)];
 

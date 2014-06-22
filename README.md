@@ -1,10 +1,10 @@
 # SBTableAlert
 
 ## Usage
-Simply init it with an NSArray, title, and specify if cancel button is needed.
+Simply initial it with an NSArray, title, and specify if cancel button is needed.
 
 	NSArray *data = [[NSArray alloc] initWithObjects:@"1", @"2", nil];
-	CKTableAlertView *alert = [[CKTableAlertView alloc] initWithData:data title:@"This is a title" hasCancelButton:YES];
+	CKTableAlertView *alert = [[CKTableAlertView alloc] initWithArray:data title:@"This is a title" hasCancelButton:YES];
 	[alert show];
 
 You can implement CKTableAlertViewDelegate in order to catch the event of clicking cells.

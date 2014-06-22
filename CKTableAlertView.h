@@ -21,5 +21,5 @@
 
 @interface CKTableAlertView : CKAlertView <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, retain) NSObject<CKTableAlertViewDelegate> *delegate;
-- (id) initWithData: (NSArray*) data title:(NSString*) title hasCancelButton:(Boolean) hasCancelButton;
+- (id) initWithArray: (NSArray*) data title:(NSString*) title hasCancelButton:(Boolean) hasCancelButton;
 @end

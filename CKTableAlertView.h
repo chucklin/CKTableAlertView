@@ -12,6 +12,8 @@
 
 @protocol CKTableAlertViewDelegate
 - (void)tableAlert:(CKTableAlertView *)tableAlert didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)clickedCancelButtonInTableAlert:(CKTableAlertView *)tableAlert;
+
 @end
 
 @interface CKAlertView : UIView
@@ -20,6 +22,7 @@
 @end
 
 @interface CKTableAlertView : CKAlertView <UITableViewDataSource, UITableViewDelegate>
+@property(nonatomic, strong) UITableView *table;
 @property (nonatomic, retain) NSObject<CKTableAlertViewDelegate> *delegate;
 - (id) initWithArray: (NSArray*) data title:(NSString*) title hasCancelButton:(Boolean) hasCancelButton;
 @end

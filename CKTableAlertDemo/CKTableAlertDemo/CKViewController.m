@@ -10,7 +10,9 @@
 #import "CKTableAlertView.h"
 
 @interface CKViewController ()
-
+{
+    Boolean handling;
+}
 @end
 
 @implementation CKViewController
@@ -23,6 +25,8 @@
     [btnShowAlert addTarget:self action:@selector(showAlert:) forControlEvents:UIControlEventTouchUpInside];
     [btnShowAlert sizeToFit];
     btnShowAlert.center = CGPointMake(100, 100);
+    
+    handling = false;
     
     [self.view addSubview:btnShowAlert];
 }
@@ -44,8 +48,28 @@
 #pragma CKTableAlerView Delegate Method
 - (void)tableAlert:(CKTableAlertView *)tableAlert didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Row #%@ selected", [NSNumber numberWithInteger:indexPath.row]);
+    if (handling == false) {
+        handling = true;
+        UITableViewCell *cell = (UITableViewCell*)[[tableAlert table] cellForRowAtIndexPath:indexPath];
+        
+        UIActivityIndicatorView *activityView =
+        [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [activityView startAnimating];
+        [cell setAccessoryView:activityView];
+        
+        [[tableAlert table] deselectRowAtIndexPath:indexPath animated:NO];
+       
+        NSLog(@"Row #%@ selected", [NSNumber numberWithInteger:indexPath.row]);
+    } else {
+        NSLog(@"Currently handling another cell");
+        [[tableAlert table] deselectRowAtIndexPath:indexPath animated:NO];
+    }
 //    [tableAlert hide];
+}
+
+- (void) clickedCancelButtonInTableAlert:(CKTableAlertView *)tableAlert
+{
+    handling = false;
 }
 
 @end

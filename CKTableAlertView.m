@@ -72,15 +72,15 @@
         [self addSubview:labTitle];
         
         _data = [[NSArray alloc] initWithArray:data];
-        UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(AlertTablePaddingX, 50, AlertTableWidth, AlertTableHeight)];
-        table.layer.borderWidth = 0.3f;
-        table.layer.borderColor = [UIColor colorWithWhite:0.85 alpha:1.0].CGColor;
-        table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-        [table setSeparatorInset:UIEdgeInsetsZero];
-        [table setDataSource:self];
-        [table setDelegate:self];
-        [self addSubview:table];
+        _table = [[UITableView alloc] initWithFrame:CGRectMake(AlertTablePaddingX, 50, AlertTableWidth, AlertTableHeight)];
+        _table.layer.borderWidth = 0.3f;
+        _table.layer.borderColor = [UIColor colorWithWhite:0.85 alpha:1.0].CGColor;
+        _table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        [_table setSeparatorInset:UIEdgeInsetsZero];
+        [_table setDataSource:self];
+        [_table setDelegate:self];
+        [self addSubview:_table];
         
         if (hasCancelButton == YES) {
             UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, AlertLinePosY, AlertWidth, 0.3f)];
@@ -105,7 +105,7 @@
     cancelBtn.frame = CGRectMake(0, AlertButtonPosY, AlertButtonWidth, AlertButtonHeight);
 
     //add touch event to hide the alertview
-    [cancelBtn addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBtn addTarget:self action:@selector(cancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     //use touch event to change the background color
     [cancelBtn addTarget:self action:@selector(changeButtonBackGroundColor:) forControlEvents:UIControlEventTouchDown];
     [cancelBtn addTarget:self action:@selector(resetButtonBackGroundColor:) forControlEvents:UIControlEventTouchUpInside];
@@ -130,6 +130,14 @@
 
 - (void)resetButtonBackGroundColor: (UIButton*)sender {
     [sender setBackgroundColor:[UIColor whiteColor]];
+}
+
+- (void)cancelButtonClicked: (id) sender
+{
+    if ([self.delegate respondsToSelector:@selector(clickedCancelButtonInTableAlert:)]) {
+        [self.delegate clickedCancelButtonInTableAlert:self];
+    }
+    [self hide];
 }
 
 #pragma UITableViewDelegate

@@ -1,4 +1,4 @@
-# SBTableAlert
+# CKTableAlertView
 
 ## Usage
 Simply initial it with an NSArray, title, and specify if cancel button is needed.
